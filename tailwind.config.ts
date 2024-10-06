@@ -1,4 +1,4 @@
-import { Translate } from "react-bootstrap-icons";
+
 import type { Config } from "tailwindcss";
 
 const config: Config = {
