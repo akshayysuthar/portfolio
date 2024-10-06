@@ -7,6 +7,7 @@ import SectionHeader from "@/components/SectionHeader";
 import Image from "next/image";
 import grainImage from "@/assets/images/grain.jpg";
 import Cards from "@/components/Cards";
+import { Fragment } from "react";
 
 const testimonials = [
   {
@@ -49,33 +50,39 @@ export const TestimonialsSection = () => {
           eyebrow="HAPPY CLIENTS"
           title="What Clients Say about Me"
           description="
-        Don't just take my word for it. See what my clients have to say about
+        Don&apos;t just take my word for it. See what my clients have to say about
         my work."
         />
-        <div className="mt-16 lg:mt-24 flex overflow-x-clip [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex gap-8 flex-none">
-            {testimonials.map((testimonial) => (
-              <Cards
-                key={testimonial.name}
-                className="max-w-xs md:p-8 p-6 md:max-w-md"
-              >
-                <div className="flex gap-4 items-center">
-                  <div className="size-14 bg-gray-700 inline-flex rounded-full items-center justify-center flex-shrink-0 ">
-                    <Image
-                      className="max-w-full "
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                    />
-                  </div>
-                  <div>
-                    <div className="font-semibold ">{testimonial.name}</div>
-                    <div className="text-sm text-white/40">
-                      {testimonial.position}
+        <div className="mt-12 lg:mt-20 flex overflow-x-clip [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-4 -my-4">
+          <div className="flex gap-8 pr-8 flex-none animate-move-left [animation-duration:60s] hover:[animation-play-state:paused] ">
+            {[...new Array(2)].fill(0).map((_, index) => (
+              <Fragment key={index}>
+                {testimonials.map((testimonial) => (
+                  <Cards
+                    key={testimonial.name}
+                    className="max-w-xs md:p-8 p-6 md:max-w-md hover:-rotate-3 transition duration-500"
+                  >
+                    <div className="flex gap-4 items-center">
+                      <div className="size-14 bg-gray-700 inline-flex rounded-full items-center justify-center flex-shrink-0 ">
+                        <Image
+                          className="max-w-full "
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                        />
+                      </div>
+                      <div>
+                        <div className="font-semibold ">{testimonial.name}</div>
+                        <div className="text-sm text-white/40">
+                          {testimonial.position}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <p className="mt-4 md:mt-6 text-sm md:text-base">{testimonial.text}</p>
-              </Cards>
+                    <p className="mt-4 md:mt-6 text-sm md:text-base">
+                      {testimonial.text}
+                    </p>
+                  </Cards>
+                ))}
+              </Fragment>
             ))}
           </div>
         </div>

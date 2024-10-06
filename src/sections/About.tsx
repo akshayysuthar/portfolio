@@ -1,3 +1,4 @@
+"use client";
 import Cards from "@/components/Cards";
 import SectionHeader from "@/components/SectionHeader";
 import StarIcon from "@/assets/icons/star.svg";
@@ -14,6 +15,8 @@ import mapImage from "@/assets/images/map.png";
 import smileMemoji from "@/assets/images/memoji-smile.png";
 import CardHeader from "@/components/CardHeader";
 import ToolboxItem from "@/components/ToolboxItem";
+import { motion } from "framer-motion";
+import { useRef } from "react";
 
 const hobbies = [
   {
@@ -83,6 +86,7 @@ const toolboxItems = [
 ];
 
 export const AboutSection = () => {
+  const constrainRef = useRef(null);
   return (
     <div className="pb-20 lg:py-28">
       <div className="container">
@@ -107,13 +111,17 @@ export const AboutSection = () => {
                 title="My Toolsbox"
                 description="Explore the technologies and tools I use to craft exceplional
                 digital experiences."
-                className=""
+                className="pb-5"
               />
-              <ToolboxItem items={toolboxItems} className="" />
+              <ToolboxItem
+                items={toolboxItems}
+                className=""
+                itemsWrapperClassName="animate-move-left [animation-duration:30s] "
+              />
               <ToolboxItem
                 items={toolboxItems}
                 className="mt-6 "
-                itemsWrapperClassName="-translate-x-1/2"
+                itemsWrapperClassName="animate-move-right [animation-duration:15s] -translate-x-1/2"
               />
             </Cards>
           </div>
@@ -125,9 +133,11 @@ export const AboutSection = () => {
                   description="Explore my interests and hobbies beyond the digital realm"
                   className="px-6 py-6"
                 />
-                <div className="relative h-full w-full">
+                <div className="relative h-full w-full" ref={constrainRef} >
                   {hobbies.map((item) => (
-                    <div
+                    <motion.div
+                      dragConstraints={constrainRef}
+                      drag
                       className="inline-flex gap-2 items-center px-6 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full py-1.5 absolute"
                       style={{
                         left: item.left,
@@ -139,7 +149,7 @@ export const AboutSection = () => {
                         {item.name}
                       </span>
                       <span>{item.emoji}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -152,6 +162,8 @@ export const AboutSection = () => {
                 src={mapImage}
               />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-20 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 after:co-[] after:inset-0 after:outline after:outline-2 after:-outline-offset-2 after:rounded-full after:outline-gray-950/30">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 animate-ping [animation-duration:2s] -z-20"></div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400  -z-10"></div>
                 <Image
                   alt="smiling memoji"
                   className="size-20"

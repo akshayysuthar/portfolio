@@ -1,27 +1,50 @@
 import React, { PropsWithChildren } from "react";
+import { twMerge } from "tailwind-merge";
 
 const HeroOrbit = ({
   children,
   size,
   rotation,
-}: PropsWithChildren<{ size: number; rotation: number }>) => {
+  OrditDuration,
+  spinDuration,
+  shouldSpin,
+  shouldOrdit,
+}: PropsWithChildren<{
+  size: number;
+  rotation: number;
+  spinDuration?: string;
+  OrditDuration?: string;
+  shouldOrdit?: boolean;
+  shouldSpin?: boolean;
+}>) => {
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  ">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
       <div
-        className="" //border border-red-500 size-[800px] animate-spin [animation-duration:30s]
+        className={twMerge(shouldOrdit == true && "animate-spin")}
         style={{
-          transform: `rotate(${rotation}deg)`,
-          height: `${size}px`,
-          width: `${size}px`,
+          animationDuration: OrditDuration,
         }}
       >
         <div
-          className="inline-flex" //border border-red-500  animate-spin [animation-duration:5s]
+          className=""
           style={{
-            transform: `rotate(${rotation * -1}deg)`,
+            transform: `rotate(${rotation}deg)`,
+            height: `${size}px`,
+            width: `${size}px`,
           }}
         >
-          {children}
+          <div
+            className={twMerge(
+              shouldSpin == true && " animate-spin",
+              "inline-flex"
+            )}
+            style={{
+              transform: `rotate(${rotation * -1}deg)`,
+              animationDuration: spinDuration,
+            }}
+          >
+            {children}
+          </div>
         </div>
       </div>
     </div>
