@@ -70,7 +70,7 @@ export const ProjectsSection = () => {
               style={{
                 top: `calc(64px + ${index * 40}px`,
               }}
-              key={project.title}
+              key={index}
             >
               <div className="lg:grid lg:grid-cols-2 lg:gap-16 ">
                 <div className="lg:pb-16">
